@@ -1,6 +1,6 @@
 # 💎 Telegram Private Link Generator & Validator
 
-![Tool Screenshot](screenshot.png)
+![Tool Screenshot](tool_screenshot.png)
 
 ---
 
