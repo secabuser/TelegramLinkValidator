@@ -31,10 +31,6 @@
 
 ---
 
-Sure! Here's a clean and professional version of the `## Installation` section for your GitHub README, written in English and formatted properly:
-
----
-
 ## Installation
 
 ### Option 1: One-Click Setup (Windows Only)
