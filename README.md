@@ -57,5 +57,5 @@ pip install -r req.txt
 
 ---
 
-My Telegram Channel -> t.me/secabuser
+My Telegram Channel -> https://www.t.me/secabuser
 
