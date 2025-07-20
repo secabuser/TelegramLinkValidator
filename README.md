@@ -57,5 +57,5 @@ pip install -r req.txt
 
 ---
 
-Let me know if you'd like to include a `start.bat` example or explain what the tool does after installation.
+My Telegram Channel -> t.me/secabuser
 
