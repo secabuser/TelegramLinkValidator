@@ -31,11 +31,35 @@
 
 ---
 
+Sure! Here's a clean and professional version of the `## Installation` section for your GitHub README, written in English and formatted properly:
+
+---
+
 ## Installation
 
 ### Option 1: One-Click Setup (Windows Only)
 
-Just run:
+Simply run the batch file:
 
 ```bat
 start.bat
+```
+
+> This will automatically install all required dependencies and launch the tool.
+
+---
+
+### Option 2: Manual Setup
+
+If you'd prefer to install manually, just run:
+
+```bash
+pip install -r req.txt
+```
+
+> Make sure you have Python 3.10+ and `pip` installed on your system.
+
+---
+
+Let me know if you'd like to include a `start.bat` example or explain what the tool does after installation.
+
