@@ -8,120 +8,114 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 
 init(autoreset=True)
 
-G = Fore.GREEN
-R = Fore.RED
-W = Fore.WHITE
-RE = Fore.RESET
+_g = Fore.GREEN
+_r = Fore.RED
+_w = Fore.WHITE
+_re = Fore.RESET
 
-class Validator:
+class _v:
     def __init__(self):
-        self.f = "link.txt"
-        self.valid_file = "valid.txt"
-        self.invalid_file = "invalid.txt"
-        self.sleep_time = 1
-        self.max_workers = 5
-        self.headers = {
+        self._f = "link.txt"
+        self._v = "valid.txt"
+        self._i = "invalid.txt"
+        self._s = 1
+        self._m = 5
+        self._h = {
             "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
         }
 
-    def clr(self):
+    def _c(self):
         os.system("cls" if os.name == "nt" else "clear")
 
-    def bnr(self):
-        b = '''
-
-
-
-▗▖   ▗▄▄▄▖▗▖  ▗▖▗▖ ▗▖    ▗▖  ▗▖ ▗▄▖ ▗▖   ▗▄▄▄▖▗▄▄▄   ▗▄▖▗▄▄▄▖▗▄▖ ▗▄▄▖ 
-▐▌     █  ▐▛▚▖▐▌▐▌▗▞▘    ▐▌  ▐▌▐▌ ▐▌▐▌     █  ▐▌  █ ▐▌ ▐▌ █ ▐▌ ▐▌▐▌ ▐▌
-▐▌     █  ▐▌ ▝▜▌▐▛▚▖     ▐▌  ▐▌▐▛▀▜▌▐▌     █  ▐▌  █ ▐▛▀▜▌ █ ▐▌ ▐▌▐▛▀▚▖
-▐▙▄▄▖▗▄█▄▖▐▌  ▐▌▐▌ ▐▌     ▝▚▞▘ ▐▌ ▐▌▐▙▄▄▖▗▄█▄▖▐▙▄▄▀ ▐▌ ▐▌ █ ▝▚▄▞▘▐▌ ▐▌
-                                                                                                                                                                                                     
-                        t.me/secabuser 
+    def _b(self):
+        _n = '''
+▗▖   ▗▄▄▄▖▗▖  ▗▖▗▖ ▗▖    ▗▖  ▗▖ ▗▄▖ ▗▖   ▗▄▄▄▖▗▄▄▄   ▗▄▖▗▄▄▄▖▗▄▖ ▗▄▄▖ 
+▐▌     █  ▐▛▚▖▐▌▐▌▗▞▘    ▐▌  ▐▌▐▌ ▐▌▐▌     █  ▐▌  █ ▐▌ ▐▌ █ ▐▌ ▐▌▐▌ ▐▌
+▐▌     █  ▐▌ ▝▜▌▐▛▚▖     ▐▌  ▐▌▐▛▀▜▌▐▌     █  ▐▌  █ ▐▛▀▜▌ █ ▐▌ ▐▌▐▛▀▚▖
+▐▙▄▄▖▗▄█▄▖▐▌  ▐▌▐▌ ▐▌     ▝▚▞▘ ▐▌ ▐▌▐▙▄▄▖▗▄█▄▖▐▙▄▄▀ ▐▌ ▐▌ █ ▝▚▄▞▘▐▌ ▐▌
+                                                                                                                                                                                                     
+                        t.me/secabuser 
 '''
-        print(Colorate.Diagonal(Colors.red_to_blue, Center.XCenter(b)))
+        print(Colorate.Diagonal(Colors.red_to_blue, Center.XCenter(_n)))
 
-    def load_links(self):
-        if not os.path.exists(self.f):
-            print(f"{R}[!]{RE} {self.f} not found!")
+    def _l(self):
+        if not os.path.exists(self._f):
+            print(f"{_r}[!]{_re} {self._f} not found!")
             exit(1)
-        with open(self.f, "r") as f:
-            return [line.strip() for line in f if line.strip()]
+        with open(self._f, "r") as _f:
+            return [_o.strip() for _o in _f if _o.strip()]
 
-    def check_link(self, url):
+    def _ch(self, _u):
         try:
-            resp = requests.get(url, headers=self.headers, timeout=10)
-            if resp.status_code != 200:
+            _r = requests.get(_u, headers=self._h, timeout=10)
+            if _r.status_code != 200:
                 return False, None, None, None
-            soup = BeautifulSoup(resp.text, "html.parser")
+            _s = BeautifulSoup(_r.text, "html.parser")
 
-            
-            title_div = soup.find("div", class_="tgme_page_title")
-            title = title_div.get_text(strip=True) if title_div else "Unknown"
+            _t = _s.find("div", class_="tgme_page_title")
+            _ti = _t.get_text(strip=True) if _t else "Unknown"
 
-            member_div = soup.find(class_="tgme_page_extra")
-            if member_div:
-                text = member_div.get_text().strip()
-                number = ''.join(filter(str.isdigit, text))
-                if number and int(number) > 0:
-                    return True, title, int(number), url
-            return False, None, None, url
+            _me = _s.find(class_="tgme_page_extra")
+            if _me:
+                _tx = _me.get_text().strip()
+                _n = ''.join(filter(str.isdigit, _tx))
+                if _n and int(_n) > 0:
+                    return True, _ti, int(_n), _u
+            return False, None, None, _u
         except Exception:
-            return False, None, None, url
+            return False, None, None, _u
 
-    def save_valid(self, data):
-        
-        with open(self.valid_file, "a", encoding="utf-8") as f:
-            for url, title, members in data:
-                f.write(f"{url} | {title} | Members: {members}\n")
+    def _sv(self, _d):
+        with open(self._v, "a", encoding="utf-8") as _f:
+            for _u, _ti, _m in _d:
+                _f.write(f"{_u} | {_ti} | Members: {_m}\n")
 
-    def save_invalid(self, urls):
-        with open(self.invalid_file, "a", encoding="utf-8") as f:
-            for url in urls:
-                f.write(url + "\n")
+    def _si(self, _u):
+        with open(self._i, "a", encoding="utf-8") as _f:
+            for _u in _u:
+                _f.write(_u + "\n")
 
-    def run(self):
-        self.clr()
-        self.bnr()
-
-        
-        try:
-            self.sleep_time = float(input(f"{W}Sleep > {RE}").strip())
-        except:
-            self.sleep_time = 1
+    def _r(self):
+        self._c()
+        self._b()
 
         try:
-            self.max_workers = int(input(f"{W}Max Work > {RE}").strip())
-            if self.max_workers < 1:
-                self.max_workers = 5
+            self._s = float(input(f"{_w}Sleep > {_re}").strip())
         except:
-            self.max_workers = 5
+            self._s = 1
 
-        links = self.load_links()
-        print(f"{W}[~] {len(links)} links : ){RE}")
+        try:
+            self._m = int(input(f"{_w}Max Work > {_re}").strip())
+            if self._m < 1:
+                self._m = 5
+        except:
+            self._m = 5
 
-        valid_links = []
-        invalid_links = []
+        _li = self._l()
+        print(f"{_w}[~] {len(_li)} links : ){_re}")
 
-        with ThreadPoolExecutor(max_workers=self.max_workers) as executor:
-            futures = {executor.submit(self.check_link, link): link for link in links}
-            for i, future in enumerate(as_completed(futures), 1):
-                is_valid, title, members, url = future.result()
-                if is_valid:
-                    print(f"{G}[{i}/{len(links)}] Valid: {url} | {title} | Members: {members}{RE}")
-                    valid_links.append((url, title, members))
+        _va = []
+        _inv = []
+
+        with ThreadPoolExecutor(max_workers=self._m) as _e:
+            _fu = {_e.submit(self._ch, _li): _li for _li in _li}
+            for _i, _fu in enumerate(as_completed(_fu), 1):
+                _is, _t, _me, _u = _fu.result()
+                if _is:
+                    print(f"{_g}[{_i}/{len(_li)}] Valid: {_u} | {_t} | Members: {_me}{_re}")
+                    _va.append((_u, _t, _me))
                 else:
-                    print(f"{R}[{i}/{len(links)}] Invalid: {url}{RE}")
-                    invalid_links.append(url)
-                sleep(self.sleep_time)
+                    print(f"{_r}[{_i}/{len(_li)}] Invalid: {_u}{_re}")
+                    _inv.append(_u)
+                sleep(self._s)
 
-        if valid_links:
-            self.save_valid(valid_links)
-            print(f"\n{G}[!]{RE} Saved {len(valid_links)} valid links to {W}{self.valid_file}{RE}")
-        if invalid_links:
-            self.save_invalid(invalid_links)
-            print(f"{R}[!]{RE} Saved {len(invalid_links)} invalid links to {W}{self.invalid_file}{RE}")
+        if _va:
+            self._sv(_va)
+            print(f"\n{_g}[!]{_re} Saved {len(_va)} valid links to {_w}{self._v}{_re}")
+        if _inv:
+            self._si(_inv)
+            print(f"{_r}[!]{_re} Saved {len(_inv)} invalid links to {_w}{self._i}{_re}")
 
 if __name__ == "__main__":
-    v = Validator()
-    v.run()
+    _a = _v()
+    _a._r()
